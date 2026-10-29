@@ -216,11 +216,11 @@
   animation: swim var(--dur) linear var(--delay) infinite;
 }
 
-.fish img {
+/* .fish img {
   display: block;
   mix-blend-mode: multiply;
   animation: bob 3s ease-in-out infinite;
-}
+} */
 
 @keyframes swim {
   from {

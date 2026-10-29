@@ -9,19 +9,19 @@ function swimParams(id) {
 }
 export default function Aquarium({ drawings }) {
     return (
-        <section className='aquarium' aria-label='Aquarium'>
+        <section className="aquarium" aria-label="Aquarium">
             {drawings.map(({ id, url }) => {
                 const p = swimParams(id);
                 return (
                     <div
                         key={id}
-                        className='fish'
+                        className="fish"
                         style={{
-                            top: `${p.top}%`, '--dur': `${p.duration}s`, '--delay':
+                            top: `${p.top}%`, "--dur": `${p.duration}s`, "--delay":
                                 `${p.delay}s`
                         }}
                     >
-                        <img src={url} alt='Dessin animé' style={{ width: p.size }} />
+                        <img src={url} alt="Dessin animé" style={{ width: p.size }} />
                     </div>
                 );
             })}

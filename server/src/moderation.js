@@ -1,19 +1,19 @@
 const SCORE_THRESHOLD = Number(process.env.MODERATION_THRESHOLD || 0.5);
 
-export async function moderateImage(buffer, mimetype = 'image/png') {
+export async function moderateImage(buffer, mimetype = "image/png") {
   const form = new FormData();
-  form.append('media', new Blob([buffer], { type: mimetype }), 'drawing.png');
-  form.append('models', 'nudity-2.1,offensive');
-  form.append('api_user', process.env.SIGHTENGINE_USER);
-  form.append('api_secret', process.env.SIGHTENGINE_SECRET);
+  form.append("media", new Blob([buffer], { type: mimetype }), "drawing.png");
+  form.append("models", "nudity-2.1,offensive");
+  form.append("api_user", process.env.SIGHTENGINE_USER);
+  form.append("api_secret", process.env.SIGHTENGINE_SECRET);
 
-  const res = await fetch('https://api.sightengine.com/1.0/check.json', {
-    method: 'POST',
+  const res = await fetch("https://api.sightengine.com/1.0/check.json", {
+    method: "POST",
     body: form,
   });
   if (!res.ok) throw new Error(`Modération indisponible (${res.status})`);
   const data = await res.json();
-  if (data.status !== 'success') throw new Error('Réponse de modération invalide');
+  if (data.status !== "success") throw new Error("Réponse de modération invalide");
 
   const n = data.nudity ?? {};
   const o = data.offensive ?? {};
