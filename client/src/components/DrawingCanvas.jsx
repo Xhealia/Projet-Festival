@@ -5,7 +5,7 @@ const DrawingCanvas = forwardRef(function DrawingCanvas({ width = 600, height
     = 400 }, ref) {
     const canvasRef = useRef(null);
     const drawing = useRef(false);
-    const [color, setColor] = useState("#0b3d91");
+    const [color, setColor] = useState("#000000");
     const [size, setSize] = useState(6);
     const fillWhite = () => {
         const ctx = canvasRef.current.getContext("2d");
