@@ -1,0 +1,17 @@
+services:
+  server:
+    build: ./server
+    env_file:
+      - ./server/.env
+    volumes:
+      - uploads:/data/uploads
+    restart: unless-stopped
+  client:
+    build: ./client
+    ports:
+     - '8080:80'
+    depends_on:
+      - server
+    restart: unless-stopped
+volumes:
+  uploads:
