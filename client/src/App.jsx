@@ -40,7 +40,7 @@ export default function App() {
   };
   return (
     <main>
-      <h1>Atelier sous-marin animé</h1>
+      <h1>Zone sous-marin animé</h1>
       <DrawingCanvas ref={canvasRef} />
       <button onClick={handleSubmit} disabled={status === "loading"}>Envoyer
         mon dessin</button>
