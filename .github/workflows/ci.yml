@@ -1,3 +1,5 @@
+# CI : lancée à chaque push sur main.
+# Elle vérifie que le code est correct avant tout déploiement.
 name: CI
 
 on:
@@ -6,6 +8,7 @@ on:
   pull_request:
 
 jobs:
+  # Teste le serveur Express (la modération est simulée, pas d'appel réel à l'API)
   server:
     runs-on: ubuntu-latest
     defaults:
@@ -20,6 +23,7 @@ jobs:
           cache-dependency-path: server/package-lock.json
       - run: npm ci
       - run: npm test
+# Vérifie la qualité du code du front (lint) et vérifie qu'il compile
   client:
     runs-on: ubuntu-latest
     defaults:
@@ -35,6 +39,8 @@ jobs:
       - run: npm ci
       - run: npm run lint
       - run: npm run build
+      
+# Vérifie que les deux images Docker se construisent
   docker:
     needs: [server, client]
     runs-on: ubuntu-latest

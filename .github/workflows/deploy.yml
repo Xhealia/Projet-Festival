@@ -1,3 +1,6 @@
+# CD : déploie automatiquement sur le serveur quand la CI réussit sur main.
+# Se connecte en SSH, met à jour le code, relance docker compose.
+# Secrets GitHub nécessaires : SERVER_HOST, SERVER_USER, SERVER_SSH_KEY
 name: Deploy
 
 on:
