@@ -10,7 +10,7 @@ const MESSAGES = {
   loading: "Analyse de ton dessin en cours...",
   approved: "Dessin validé ! Il nage maintenant dans l'aquarium.",
   rejected: "Ce dessin a été refusé par la modération.",
-  error: "Une erreur est survenue, réessaie plus tard.",
+  error: "Une erreur est survenue, réessaie plus tard",
 };
 
 export default function App() {
