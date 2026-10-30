@@ -4,6 +4,7 @@ export async function moderateImage(buffer, mimetype = "image/png") {
   const form = new FormData();
   form.append("media", new Blob([buffer], { type: mimetype }), "drawing.png");
   form.append("models", "nudity-2.1,offensive");
+  form.append("opt_lang", "en,fr");
   form.append("api_user", process.env.SIGHTENGINE_USER);
   form.append("api_secret", process.env.SIGHTENGINE_SECRET);
 
