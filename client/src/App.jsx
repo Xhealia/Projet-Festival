@@ -8,7 +8,7 @@ import "./App.css";
 const MESSAGES = {
   idle: "",
   loading: "Analyse de ton dessin en cours...",
-  approved: "Dessin validé ! Il nage maintenant dans l\'aquarium.",
+  approved: "Dessin validé ! Il nage maintenant dans l'aquarium.",
   rejected: "Ce dessin a été refusé par la modération.",
   error: "Une erreur est survenue, réessaie plus tard.",
 };
