@@ -14,7 +14,7 @@ export async function moderateImage(buffer, mimetype = "image/png") {
   form.append("models", "nudity-2.1,offensive,text-content-2.0");
   form.append("text_categories", TEXT_CATEGORIES.join(","));
   form.append("opt_lang", "fr");
-  form.append("opt_countries", "fr,us,gb");
+  form.append("opt_countries", "fr");
   form.append("api_user", process.env.SIGHTENGINE_USER);
   form.append("api_secret", process.env.SIGHTENGINE_SECRET);
 
@@ -28,7 +28,7 @@ export async function moderateImage(buffer, mimetype = "image/png") {
     throw new Error(`Modération indisponible (${res.status})`);
   }
   const data = await res.json();
-  console.log("TEXT:", JSON.stringify(data.text, null, 2));
+  console.log("TEXT:", JSON.stringify(data, null, 2));
   if (data.status !== "success") throw new Error("Réponse de modération invalide");
 
   const n = data.nudity ?? {};
