@@ -1,51 +1,19 @@
-import { useEffect, useRef, useState } from "react";
-import DrawingCanvas from "./components/DrawingCanvas.jsx";
-import Aquarium from "./components/Aquarium.jsx";
-import { submitDrawing, listDrawings } from "./api.js";
-import "./App.css";
-
-
-const MESSAGES = {
-  idle: "",
-  loading: "Analyse de ton dessin en cours...",
-  approved: "Dessin validé ! Il nage maintenant dans l'aquarium.",
-  rejected: "Ce dessin a été refusé par la modération.",
-  error: "Une erreur est survenue, réessaie plus tard",
-};
+import { Routes, Route, Navigate } from 'react-router-dom';
+import NavBar from './components/NavBar.jsx';
+import DrawPage from './pages/DrawPage.jsx';
+import AquariumPage from './pages/AquariumPage.jsx';
 
 export default function App() {
-  const canvasRef = useRef(null);
-  const [status, setStatus] = useState("idle");
-  const [drawings, setDrawings] = useState([]);
-  useEffect(() => {
-    listDrawings().then(setDrawings).catch(() => { });
-  }, []);
-  const handleSubmit = async () => {
-    setStatus("loading");
-    try {
-      const blob = await canvasRef.current.toBlob();
-      const result = await submitDrawing(blob);
-      if (result.status === "approved") {
-        setDrawings((d) => [...d, { id: result.id, url: result.url }]);
-        canvasRef.current.clear();
-        setStatus("approved");
-      } else if (result.status === "rejected") {
-        setStatus("rejected");
-      } else {
-        setStatus("error");
-      }
-    } catch {
-      setStatus("error");
-    }
-  };
   return (
-    <main>
-      <h1>Atelier sous-marin animé</h1>
-      <DrawingCanvas ref={canvasRef} />
-      <button onClick={handleSubmit} disabled={status === "loading"}>Envoyer
-        mon dessin</button>
-      <p role="status">{MESSAGES[status]}</p>
-      <Aquarium drawings={drawings} />
-    </main>
+    <>
+      <NavBar />
+      <main className='page'>
+        <Routes>
+          <Route path='/' element={<DrawPage />} />
+          <Route path='/aquarium' element={<AquariumPage />} />
+          <Route path='*' element={<Navigate to='/' replace />} />
+        </Routes>
+      </main>
+    </>
   );
 }
